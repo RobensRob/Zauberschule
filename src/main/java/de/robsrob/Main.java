@@ -24,30 +24,9 @@ public class Main {
         fillMatrix(br, labyrinth1, y, x);
         br.readLine();
         fillMatrix(br, labyrinth2, y, x);
-    }
 
-    private Direction findShortestPath(char[][] lab, int ax, int ay, int bx, int by, int y, int x) {
-        Queue<Node> queue = new ArrayDeque<>();
-        char[][] discovered = new char[y][x];
-        discovered[ay][ax] = 'd';
-        queue.add(new Node(ax, ay, null));
 
-        while(!queue.isEmpty()) {
-            Node node = queue.poll();
-            for(Direction dir : Direction.values()) {
-                int newX = node.x + dir.getDx();
-                int newY = node.y + dir.getDy();
-                Direction newDir = node.initialDir == null ? dir : node.initialDir;
 
-                if(newX == bx && newY == by) {
-                    return newDir;
-                }
-                if((lab[newY][newX] == '.') && (discovered[newY][newX] == 'd')) {
-                    discovered[newY][newX] = '#';
-                    queue.add(new Node(newX, newY, newDir));
-                }
-            }
-        } throw new IllegalStateException("No path found");
     }
 
     static void fillMatrix(BufferedReader br, char[][] matrix, int y, int x) throws Exception{
