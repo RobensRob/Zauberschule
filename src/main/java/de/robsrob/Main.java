@@ -5,8 +5,16 @@ import java.io.File;
 import java.io.FileReader;
 
 public class Main {
+
+    private static final int[] row = {-1, 0, 0, 1};
+    private static final int[] col = {0, -1, 1, 0};
+
+    private static boolean isValid(char[][][] matrix, int floor, int x, int y) {
+        return (matrix[floor][y][x] == '.');
+    }
+
     public static void main(String[] args) throws Exception{
-        File file = new File("D:/Coding/Programs/Zauberschule/src/main/java/de/robsrob/aufgaben/zauberschule0.txt");
+        File file = new File("/home/robin/Schreibtisch/Schule/Informatik/BWINF/Zauberschule/Aufgaben/zauberschule0.txt");
         BufferedReader br = new BufferedReader(new FileReader(file));
 
         char[][][] lab;
@@ -18,6 +26,8 @@ public class Main {
         lab = new char[2][y][x];
 
         fill3dMatrix(br, lab, y, x);
+        System.out.println(lab[0][0][0]);
+        System.out.println(isValid(lab, 0, 0, 0));
     }
 
     static void fill3dMatrix(BufferedReader br, char[][][] matrix, int y, int x) throws Exception {
@@ -25,7 +35,6 @@ public class Main {
             for(int j = 0; j < y; j++) {
                 String line = br.readLine();
                 if(!line.equals("")) {
-                    System.out.println(line);
                     char[] currentLine = line.toCharArray();
                     for(int k = 0; k < x; k++) {
                         matrix[i][j][k] = currentLine[k];
