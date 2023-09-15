@@ -8,36 +8,8 @@ import java.util.Queue;
 
 public class Main {
 
-    static int[] dfloors = {-1, 1, 0, 0, 0, 0};
-    static int[] dx = {0, 0, -1, 1, 0 ,0};
-    static int[] dy = {0, 0, 0, 0, -1, 1};
-
     private static int findShortestPath(char[][][] labyrinth) {
-        int floors = labyrinth.length;
-        int y = labyrinth[0].length;
-        int x = labyrinth[0][0].length;
-
-        Queue<Point> queue = new LinkedList<>();
-        boolean[][][] visited = new boolean[floors][y][x];
-
-        for(int i = 0; i < floors; i++) {
-            for(int j = 0; j < y; j++) {
-                for(int k = 0; k < x; k++) {
-                    if(labyrinth[i][j][k] == 'A') {
-                        queue.add(new Point(i, j, k, 0));
-                        visited[i][j][k] = true;
-                    }
-                }
-            }
-        }
-
-        while(!queue.isEmpty()) {
-            Point current = queue.poll();
-            if(labyrinth[current.floor][current.y][current.x] == 'B') {
-                return current.distance;
-            }
-
-        }
+        return 0;
     }
     public static void main(String[] args) throws Exception{
         File file = new File("/home/robin/Schreibtisch/Schule/Informatik/BWINF/Zauberschule/Aufgaben/zauberschule0.txt");
@@ -54,7 +26,6 @@ public class Main {
         fill3dMatrix(br, lab, y, x);
         print3dMatrix(lab, 1);
         System.out.println(lab[0][0][0]);
-        System.out.println(isValid(lab, 0, 0, 0));
     }
 
     static void fill3dMatrix(BufferedReader br, char[][][] matrix, int y, int x) throws Exception {
