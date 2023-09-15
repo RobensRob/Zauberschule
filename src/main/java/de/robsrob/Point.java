@@ -1,15 +1,12 @@
 package de.robsrob;
 
 public class Point {
-    int floor;
-    int x;
-    int y;
-    int distance;
+    int x, y, z, distance;
 
-    public Point(int floor, int y, int x, int distance) {
-        this.floor = floor;
-        this.y = y;
+    public Point(int x, int y, int z, int distance) {
         this.x = x;
+        this.y = y;
+        this.z = z;
         this.distance = distance;
     }
 }
