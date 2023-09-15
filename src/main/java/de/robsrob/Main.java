@@ -3,16 +3,42 @@ package de.robsrob;
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileReader;
+import java.util.LinkedList;
+import java.util.Queue;
 
 public class Main {
 
-    private static final int[] row = {-1, 0, 0, 1};
-    private static final int[] col = {0, -1, 1, 0};
+    static int[] dfloors = {-1, 1, 0, 0, 0, 0};
+    static int[] dx = {0, 0, -1, 1, 0 ,0};
+    static int[] dy = {0, 0, 0, 0, -1, 1};
 
-    private static boolean isValid(char[][][] matrix, int floor, int x, int y) {
-        return (matrix[floor][y][x] == '.');
+    private static int findShortestPath(char[][][] labyrinth) {
+        int floors = labyrinth.length;
+        int y = labyrinth[0].length;
+        int x = labyrinth[0][0].length;
+
+        Queue<Point> queue = new LinkedList<>();
+        boolean[][][] visited = new boolean[floors][y][x];
+
+        for(int i = 0; i < floors; i++) {
+            for(int j = 0; j < y; j++) {
+                for(int k = 0; k < x; k++) {
+                    if(labyrinth[i][j][k] == 'A') {
+                        queue.add(new Point(i, j, k, 0));
+                        visited[i][j][k] = true;
+                    }
+                }
+            }
+        }
+
+        while(!queue.isEmpty()) {
+            Point current = queue.poll();
+            if(labyrinth[current.floor][current.y][current.x] == 'B') {
+                return current.distance;
+            }
+
+        }
     }
-
     public static void main(String[] args) throws Exception{
         File file = new File("/home/robin/Schreibtisch/Schule/Informatik/BWINF/Zauberschule/Aufgaben/zauberschule0.txt");
         BufferedReader br = new BufferedReader(new FileReader(file));
@@ -26,6 +52,7 @@ public class Main {
         lab = new char[2][y][x];
 
         fill3dMatrix(br, lab, y, x);
+        print3dMatrix(lab, 1);
         System.out.println(lab[0][0][0]);
         System.out.println(isValid(lab, 0, 0, 0));
     }
