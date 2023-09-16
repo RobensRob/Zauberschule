@@ -67,6 +67,51 @@ public class Main {
         }
         return -1;
     }
+
+    private int algorithm(char[][][] lab, int n, int m) {
+        int[][][] visited = new int[2][n][m];
+        Queue<Point> queue = new LinkedList<>();
+
+        for(int i = 0; i < 2; i++) {
+            for(int j = 0; j < n; j++) {
+                for(int k = 0; k < m; k++) {
+                    visited[i][j][k] = -1;
+                }
+            }
+        }
+
+        int startX = -1, startY = -1, startZ = -1;
+        int endX = -1, endY = -1, endZ = -1;
+
+        for(int i = 0; i < 2; i++) {
+            for(int j = 0; j < n; j++) {
+                for(int k = 0; k < m; k++) {
+                    if(lab[i][j][k] == 'A') {
+                        startX = k;
+                        startY = j;
+                        startZ = i;
+                    } else if(lab[i][j][k] == 'B') {
+                        endX = k;
+                        endY = j;
+                        endZ = i;
+                    }
+                }
+            }
+        }
+
+        queue.add(new Point(startX, startY, startZ, 0));
+        visited[startZ][startY][startX] = 0;
+
+        while(!queue.isEmpty()) {
+            Point current = queue.poll();
+            if(current.x == endX && current.y == endY && current.z == endZ) {
+                return current.distance;
+            }
+
+        }
+        return 0;
+    }
+
     public static void main(String[] args) throws Exception{
         File file = new File("D:/Coding/Programs/Zauberschule/src/main/java/de/robsrob/aufgaben/zauberschule0.txt");
         BufferedReader br = new BufferedReader(new FileReader(file));
